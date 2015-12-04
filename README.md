@@ -1,0 +1,2 @@
+# zakonodaja
+Koda s sekatona.
