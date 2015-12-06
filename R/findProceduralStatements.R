@@ -17,12 +17,11 @@
 #' color means non-procedural, red means procedural (and should possibly be removed).
 #' @examples
 #' \dontrun{
-#' library(tm)
-#' unzip("./data/data.zip")
+#' unzip("./data/data.zip", exdir = "./data")
 #' out <- findProceduralStatements(train_proc = "./data/izjave_proc.txt",
 #'                          train_actual = "./data/izjave_vsebina.txt",
 #'                          full_data = "./data/izjava_HAINZ PRIMOZ.txt",
-#'                          html_file = "rezultat.html")
+#'                          html_file = "./sandy/rezultat.html")
 #' }
 #'
 findProceduralStatements <- function(train_proc, train_actual, full_data, html_file, ...) {
@@ -47,6 +46,7 @@ findProceduralStatements <- function(train_proc, train_actual, full_data, html_f
     out <- classify_model(ct.h, model = mdl)
     out$col <- ifelse(out$SVM_LABEL == 1, "#FF0000", "#00FF00")
 
+    html_file = file(description = html_file, open = "w+", encoding = "UTF-8")
     cat("<table>", file = html_file)
     for(i in 1:length(h)) {
         cat(sprintf('<tr style="color: %s"><td>%s</td></tr>', out[i, "col"], h[i]), file = html_file, append = TRUE)
