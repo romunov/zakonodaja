@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+/sandy
+/.git
+README.md
+/data

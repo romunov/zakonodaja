@@ -1,0 +1,74 @@
+---
+title: "Sekaton"
+author: "Roman Luštrik"
+date: "04. december 2015"
+output: html_document
+---
+
+```{r enter_sandman}
+library(rjson)
+```
+
+```{r import_array}
+download.file("http://www.zakonodajni-monitor.si/api/poslanci/vsi", dest = "./data/vsi_poslanci.txt")
+fsi <- fromJSON(file = "./data/vsi_poslanci.txt")
+```
+
+```{r sample_one_name}
+# najdi vsa imena
+fsi.imena <- sapply(fsi, function(x) x$properties$name)
+
+fsi[[which(fsi.imena %in% "JURŠA FRANC")]]$properties$contacts
+```
+
+```{r}
+as.POSIXlt("2014-07-31T22:00:00.000Z")
+```
+
+Kako ločiti izjave, ki so vsebinske in izjave, ki se tičejo vodenja postopka (Matej je dal primer na Milanu Brglezu, ki je pretcednik xyz). Se naredi na roke seznam procuderalnih izjav in neprocuderalnih izjav, in se poskuša napovedat ali nov dokument pripada eni ali drugi.
+
+Analiza: potek/čas trajanja obravnave zakonodaje iz različnih področij (sodstvo, kazenska z., gospodarska z., finančna z., z. ki se tiče javnih uslužbencev).
+
+Ajda: poiskati kako se poslanci vedejo pri glasovanju glede na svojo skupino
+
+Marko: ali lahko napovemo odcepitve iz poslanskih skupin?
+
+Roman: pomenska analiza izjav in razvrščanje poslanca v skupino/e?
+
+Matej: koliko zakonov/predlogov, ki jih predlaga opozicija gre v državni zbor? Ali lahko vidimo, da nekdo glasuje proti predlogu, kljub temu, da je glasoval zanj v preteklosti (ko je bil npr. v vladi).
+
+Ajda: redni maili na teme, ki jih želiš spremljati, da ti pošilja kaj se dogaja na to temo
+
+Domen: analiza strank na katere teme se oglašajo
+
+Roman: na katerih stopnjah se dogajajo spremembe v postopku sprejemanja nekega predpisa (v skupini, strokovno usklajevanje, medresorsko usklajevanje, javna razprava...)
+
+Vid: spremljanje učinka sprejete zakonodaje
+
+NA: problem sledenja predlogov, ki privedejo, da se nek predpis odpre v diskusijo
+
+www.stevec-krsitev.si
+
+Andrej Burja, Aljaž (dijak), Ajda (FRI) - python
+
+Katič
+Hainz
+Brglez
+
+### Dobi vse izjave Primoža Hainza
+```{r}
+hai <- fromJSON(readLines("http://zakonodajni-monitor.si/api/izjave/avtor/en/HAINZ%20PRIMO%C5%BD/true"))
+
+hai.text <- sapply(hai[[1]], FUN = "[[", "text")
+sapply(hai.text, write, sep = "\n", file = file("izjave_hainz.txt", encoding = "UTF-8", open = "w"), append = TRUE)
+```
+
+```{r}
+
+
+writeStatement("HAINZ PRIMOŽ")
+writeStatement("KATIČ ANDREJA")
+writeStatement("BRGLEZ MILAN")
+```
+
+

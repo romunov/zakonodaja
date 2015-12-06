@@ -1,0 +1,17 @@
+Package: zakonodajnik
+Type: Package
+Title: Scrape and analyze www.zakonodajni-monitor.si
+Version: 0.1
+Date: 2015-12-06
+Author: Roman Lustrik
+Maintainer: Roman Lustrik <roman.lustrik@biolitika.si>
+Description: Scrape and analyze assembly data. See www.zakonodajni-monitor.si.
+Depends:
+    R (>= 3.1.1)
+Depends:
+    RTextTools,
+    tm
+License: GPL-2
+Encoding: UTF-8
+LazyData: FALSE
+RoxygenNote: 5.0.1
